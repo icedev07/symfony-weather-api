@@ -26,7 +26,8 @@ class WeatherService
             $response = $this->httpClient->request('GET', "{$this->apiUrl}/current.json", [
                 'query' => [
                     'key' => $this->apiKey,
-                    'q' => $city
+                    'q' => $city,
+                    'lang' => 'uk'
                 ]
             ]);
 
@@ -42,11 +43,11 @@ class WeatherService
                 'last_updated' => $data['current']['last_updated'],
             ];
 
-            $this->logger->info("Weather data retrieved successfully for {$city}", $result);
+            $this->logger->info("Погода в {$city}: {$result['temperature']}°C, {$result['condition']}");
 
             return $result;
         } catch (\Exception $e) {
-            $this->logger->error("Error fetching weather data: " . $e->getMessage());
+            $this->logger->error("Помилка отримання даних про погоду: " . $e->getMessage());
             throw $e;
         }
     }

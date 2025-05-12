@@ -23,7 +23,7 @@ class WeatherController extends AbstractController
     #[Route('/weather/show', name: 'weather_show', methods: ['GET'])]
     public function show(Request $request): Response
     {
-        $city = $request->query->get('city', 'London');
+        $city = $request->query->get('city', 'Київ');
         
         try {
             $weatherData = $this->weatherService->getWeatherData($city);
@@ -31,7 +31,7 @@ class WeatherController extends AbstractController
                 'weather' => $weatherData
             ]);
         } catch (\Exception $e) {
-            $this->addFlash('error', 'Unable to fetch weather data: ' . $e->getMessage());
+            $this->addFlash('error', 'Неможливо отримати дані про погоду: ' . $e->getMessage());
             return $this->redirectToRoute('weather_form');
         }
     }

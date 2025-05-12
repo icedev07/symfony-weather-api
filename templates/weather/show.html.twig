@@ -1,24 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Weather for {{ weather.city }}{% endblock %}
+{% block title %}Погода у місті {{ weather.city }}{% endblock %}
 
 {% block body %}
     <div class="container mt-5">
-        <h1>Current Weather in {{ weather.city }}, {{ weather.country }}</h1>
-        
-        <div class="card mt-4">
-            <div class="card-body">
-                <h5 class="card-title">Weather Details</h5>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Temperature: {{ weather.temperature }}°C</li>
-                    <li class="list-group-item">Condition: {{ weather.condition }}</li>
-                    <li class="list-group-item">Humidity: {{ weather.humidity }}%</li>
-                    <li class="list-group-item">Wind Speed: {{ weather.wind_speed }} km/h</li>
-                    <li class="list-group-item">Last Updated: {{ weather.last_updated }}</li>
-                </ul>
+        {% if error is defined %}
+            <div class="alert alert-danger">
+                Помилка: {{ error }}
             </div>
-        </div>
+        {% else %}
+            <div class="weather-info">
+                <h2>Поточна погода в {{ weather.city }}, {{ weather.country }}:</h2>
+                
+                <div class="weather-details mt-4">
+                    <p><strong>Температура:</strong> {{ weather.temperature }}°C</p>
+                    <p><strong>Стан:</strong> {{ weather.condition }}</p>
+                    <p><strong>Вологість:</strong> {{ weather.humidity }}%</p>
+                    <p><strong>Швидкість вітру:</strong> {{ weather.wind_speed }} км/год</p>
+                    <p><strong>Останнє оновлення:</strong> {{ weather.last_updated }}</p>
+                </div>
+            </div>
 
-        <a href="{{ path('weather_form') }}" class="btn btn-primary mt-3">Check Another City</a>
+            <a href="{{ path('weather_form') }}" class="btn btn-primary mt-3">Перевірити інше місто</a>
+        {% endif %}
     </div>
 {% endblock %} 
