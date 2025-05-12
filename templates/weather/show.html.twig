@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Weather for {{ weather.city }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Current Weather in {{ weather.city }}, {{ weather.country }}</h1>
+        
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Weather Details</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Temperature: {{ weather.temperature }}°C</li>
+                    <li class="list-group-item">Condition: {{ weather.condition }}</li>
+                    <li class="list-group-item">Humidity: {{ weather.humidity }}%</li>
+                    <li class="list-group-item">Wind Speed: {{ weather.wind_speed }} km/h</li>
+                    <li class="list-group-item">Last Updated: {{ weather.last_updated }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="{{ path('weather_form') }}" class="btn btn-primary mt-3">Check Another City</a>
+    </div>
+{% endblock %} 

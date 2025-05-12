@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Weather Information{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Weather Information</h1>
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <form action="{{ path('weather_show') }}" method="get" class="mt-4">
+            <div class="form-group">
+                <label for="city">Enter City Name:</label>
+                <input type="text" name="city" id="city" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Get Weather</button>
+        </form>
+    </div>
+{% endblock %} 
